@@ -6,11 +6,14 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRB;
     private bool isOnGround = true;
+    public float jumpForce = 10.0f;
     public bool gameOver = false;
+    public float gravityModifier; 
 
     private void Start()
     {
         playerRB = GetComponent<Rigidbody>();
+        Physics.gravity *= gravityModifier;
     }
 
     private void Update()
@@ -22,7 +25,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
         {
-            playerRB.AddForce(Vector3.up * 10, ForceMode.Impulse);
+            playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
         }
     }
