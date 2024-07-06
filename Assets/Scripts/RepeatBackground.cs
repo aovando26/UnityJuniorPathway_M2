@@ -9,7 +9,7 @@ public class RepeatBackground : MonoBehaviour
 
     // Variable to store half of the BoxCollider size
     private float repeatWidth;
-    
+
     void Start()
     {
         // assigning start position 
