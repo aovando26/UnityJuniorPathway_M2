@@ -5,7 +5,8 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     private Rigidbody _rigidbody;
-    public GameObject _player; 
+    public GameObject _player;
+    public float speed = 2.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,6 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _rigidbody.AddForce(_player.transform.forward);
+        _rigidbody.AddForce((_player.transform.position - transform.position).normalized * speed);
     }
 }
