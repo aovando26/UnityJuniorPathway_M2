@@ -18,9 +18,16 @@ public class Target : MonoBehaviour
     private float xRange = 4; 
     private float yPos = 6;
 
+    private GameManager gameManager;
+    public int pointValue;
+    public ParticleSystem explosionParticle; 
+
     // Start is called before the first frame update
     void Start()
     {
+
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>(); 
+
         // retrieve rigidbody component 
         targetRb = GetComponent<Rigidbody>();
 
@@ -43,11 +50,20 @@ public class Target : MonoBehaviour
     private void OnMouseDown()
     {
         Destroy(gameObject);
+        gameManager.UpdateScore(pointValue);
+        Instantiate(explosionParticle, transform.position, transform.rotation);
     }
 
     private void OnTriggerEnter(Collider col)
     {
         Destroy(gameObject);
+
+
+        // we want good objects to fall below to cause game over
+        if (!gameObject.CompareTag("Bad"))
+        {
+            gameManager.GameOver();
+        }
     }
 
     private Vector3 RandomForce()
